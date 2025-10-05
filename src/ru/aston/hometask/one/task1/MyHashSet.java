@@ -1,8 +1,11 @@
-package homework1.task1;
+package ru.aston.hometask.one.task1;
+
+import java.util.Objects;
 
 public class MyHashSet<E> {
     private static final int DEFAULT_CAPACITY = 16;
-    private Node<E>[] table = new Node[DEFAULT_CAPACITY];
+    private static final int MAX_CAPACITY = 1 << 30;
+    private Node<E>[] table;
     private int size;
 
     private static class Node<E> {
@@ -14,15 +17,38 @@ public class MyHashSet<E> {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public MyHashSet() {
+        table = new Node[DEFAULT_CAPACITY];
+        size = 0;
+    }
+
+    @SuppressWarnings("unchecked")
+    public MyHashSet(int initialCapacity) {
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException("Illegal initial capacity: " + initialCapacity);
+        }
+        if (initialCapacity > MAX_CAPACITY) {
+            initialCapacity = MAX_CAPACITY;
+        }
+
+        int capacity = 1;
+        while (capacity < initialCapacity) {
+            capacity <<= 1;
+        }
+
+        table = new Node[capacity];
+        size = 0;
+    }
+
     public boolean add(E element) {
-        int index = Math.abs(element.hashCode()) % table.length;
+        int index = getIndex(element);
         Node<E> current = table[index];
 
         while (current != null) {
-            if (current.data.equals(element)) return false;
+            if (Objects.equals(current.data, element)) return false;
             current = current.next;
         }
-
         Node<E> newNode = new Node<>(element);
         newNode.next = table[index];
         table[index] = newNode;
@@ -31,14 +57,17 @@ public class MyHashSet<E> {
     }
 
     public boolean remove(E element) {
-        int index = Math.abs(element.hashCode()) % table.length;
+        int index = getIndex(element);
         Node<E> current = table[index];
         Node<E> prev = null;
 
         while (current != null) {
-            if (current.data.equals(element)) {
-                if (prev == null) table[index] = current.next;
-                else prev.next = current.next;
+            if (Objects.equals(current.data, element)) {
+                if (prev == null) {
+                    table[index] = current.next;
+                } else {
+                    prev.next = current.next;
+                }
                 size--;
                 return true;
             }
@@ -46,6 +75,10 @@ public class MyHashSet<E> {
             current = current.next;
         }
         return false;
+    }
+
+    private int getIndex(E element) {
+        return element == null ? 0 : Math.abs(element.hashCode()) % table.length;
     }
 
     @Override

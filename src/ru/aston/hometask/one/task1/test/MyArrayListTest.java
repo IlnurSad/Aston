@@ -1,15 +1,16 @@
-package homework1.task1.test;
+package ru.aston.hometask.one.task1.test;
 
-import homework1.task1.MyArrayList;
+import ru.aston.hometask.one.task1.MyArrayList;
 
 public class MyArrayListTest {
     public static void main(String[] args) {
-        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        MyArrayList<Integer> myArrayList = new MyArrayList<>(16);
         myArrayList.add(1);
         myArrayList.add(2);
         myArrayList.add(15);
         myArrayList.add(8);
         myArrayList.add(10);
+        myArrayList.add(null);
         System.out.println("Вывод ArrayList: " + myArrayList);
 
         System.out.println("Вывод элемента по индексу: " + myArrayList.get(2));

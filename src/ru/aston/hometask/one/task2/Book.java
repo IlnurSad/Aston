@@ -1,4 +1,4 @@
-package homework1.task2;
+package ru.aston.hometask.one.task2;
 
 import java.util.Objects;
 
@@ -15,7 +15,6 @@ public class Book {
         this.pages = pages;
     }
 
-    // Геттеры
     public String getTitle() {
         return title;
     }

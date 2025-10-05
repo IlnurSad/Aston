@@ -1,4 +1,4 @@
-package homework1.task2;
+package ru.aston.hometask.one.task2;
 
 import java.util.List;
 
