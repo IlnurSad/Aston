@@ -17,6 +17,10 @@ public class Car {
         this.hasLeatherSeats = builder.hasLeatherSeats;
     }
 
+    public static CarBuilder builder(String brand, String model) {
+        return new CarBuilder(brand, model);
+    }
+
     public String getBrand() { return brand; }
     public String getModel() { return model; }
     public Integer getYear() { return year; }

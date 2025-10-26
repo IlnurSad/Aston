@@ -18,7 +18,7 @@ public class BuilderPatternDemo {
 
         System.out.println(car2);
 
-        final Car car3 = new Car.CarBuilder("BMW", "X5")
+        final Car car3 = Car.builder("BMW", "X5")
                 .year(2023)
                 .color("Black")
                 .hasLeatherSeats(true)

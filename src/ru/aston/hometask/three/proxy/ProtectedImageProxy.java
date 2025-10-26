@@ -1,10 +1,10 @@
 package ru.aston.hometask.three.proxy;
 
 public class ProtectedImageProxy implements Image {
+    private static final String PERMISSION_IMAGE_VIEW = "IMAGE_VIEW";
     private RealImage realImage;
     private final String fileName;
     private final User user;
-    private static final String PERMISSION_IMAGE_VIEW = "IMAGE_VIEW";
 
     public ProtectedImageProxy(String fileName, User user) {
         this.fileName = fileName;
